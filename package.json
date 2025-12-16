@@ -1,0 +1,14 @@
+{
+  "name": "vectors",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "NaughtySora <naughtysora@proton.me>",
+  "type": "commonjs",
+  "exports": "./main.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "node ./test/index.js"
+  }
+}
