@@ -71,4 +71,16 @@ describe('Vector', () => {
     assert.equal(vec.size, 0);
     assert.equal(vec.capacity, 0);
   });
+
+  it('get/set', () => {
+    const vec = new Vector(Int8Array);
+    vec.resize(4);
+    vec.set(1, 16);
+    assert.equal(vec.get(1), 16);
+    vec.set(3, 32);
+    assert.equal(vec.get(3), 32);
+    vec.set(4, 28);
+    assert.equal(vec.get(4), undefined);
+    assert.equal(vec.get(-1), undefined);
+  });
 });
