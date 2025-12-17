@@ -18,7 +18,7 @@ export class Vector {
   delete(index: number): void;
   toString(): string;
   [Symbol.dispose](): void;
-  [Symbol.iterator](): Iterable<number>;
+  [Symbol.iterator](): Iterator<number>;
   length: number;
   size: number;
   capacity: number;
