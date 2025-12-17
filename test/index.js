@@ -40,6 +40,13 @@ describe('Vector', () => {
     assert.equal(vec.length, 0);
     assert.equal(vec.size, 0);
     assert.equal(vec.capacity, 4);
+    vec.pop();
+    const v = vec.pop();
+    assert.equal(v, undefined);
+    vec.pop();
+    assert.equal(vec.length, 0);
+    assert.equal(vec.size, 0);
+    assert.equal(vec.capacity, 4);
   });
 
   it('clear', () => {
@@ -82,5 +89,71 @@ describe('Vector', () => {
     vec.set(4, 28);
     assert.equal(vec.get(4), undefined);
     assert.equal(vec.get(-1), undefined);
+  });
+
+  it('resize', () => {
+    const vec = new Vector(Int32Array, 4);
+    assert.equal(vec.length, 0);
+    assert.equal(vec.capacity, 4);
+    vec.resize(4);
+    assert.equal(vec.length, 4);
+    assert.equal(vec.capacity, 4);
+    assert.throws(() => {
+      vec.resize(12.5);
+    }, { message: 'resize value should be positive integer or zero' })
+  });
+
+  it('insert/delete', () => {
+    const vec = new Vector(Float32Array, 4);
+    vec.push(11);
+    vec.push(32);
+    vec.push(16);
+    assert.equal(vec.length, 3);
+    vec.insert(1, 15);
+    assert.deepEqual([...vec], [11, 15, 32, 16]);
+    vec.delete(2);
+    vec.insert(5, 25);
+    assert.deepEqual([...vec], [11, 15, 16]);
+    vec.insert(1, 1);
+    vec.insert(3, 12);
+    assert.deepEqual([...vec], [11, 1, 15, 12, 16]);
+    vec.delete(10);
+    assert.deepEqual([...vec], [11, 1, 15, 12, 16]);
+  });
+
+  it('toString', () => {
+    const vec = new Vector(Int32Array, 4);
+    assert.equal(vec.toString(), '');
+    vec.push(3);
+    vec.push(5);
+    vec.push(8);
+    assert.equal(vec.toString(), '3,5,8');
+    vec.clear();
+    assert.equal(vec.toString(), '');
+  });
+
+  it('iterator', () => {
+    const vec = new Vector(Int32Array, 2);
+    assert.deepEqual([...vec], []);
+    vec.push(1);
+    vec.push(3);
+    assert.deepEqual([...vec], [1, 3]);
+  });
+
+  it('disposable', () => {
+    let v = null;
+    {
+      using vec = new Vector(Int8Array, 4);
+      vec.push(1);
+      assert.equal(vec.get(0), 1);
+      v = vec;
+    }
+    assert.equal(v.get(0), undefined);
+    assert.equal(v.length, 0);
+  });
+
+  it('toStringTag', () => {
+    const vec = new Vector(Int32Array);
+    assert.equal(Object.prototype.toString.call(vec), '[object Vector]');
   });
 });
