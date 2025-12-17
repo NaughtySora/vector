@@ -1,6 +1,6 @@
 'use strict';
 
-const Vector = require('../lib/Vector.js');
+const { Vector } = require('../main');
 const assert = require('node:assert/strict');
 const { describe, it } = require('node:test');
 

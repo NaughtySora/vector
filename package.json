@@ -1,13 +1,24 @@
 {
   "name": "vectors",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "MIT",
   "author": "NaughtySora <naughtysora@proton.me>",
   "type": "commonjs",
   "exports": "./main.js",
-  "directories": {
-    "lib": "lib"
-  },
+  "description": "JS Vector",
+  "keywords": [
+    "JS",
+    "Nodejs",
+    "Vector",
+    "Vec",
+    "BinaryVector"
+  ],
+  "files": [
+    "lib/",
+    "main.d.ts"
+  ],
+  "readmeFilename": "README.md",
+  "types": "main.d.ts",
   "scripts": {
     "test": "c8 node ./test/index.js"
   },
