@@ -16,7 +16,6 @@ describe('Vector', () => {
     assert.equal(vec2.size, 0);
   });
 
-
   it('push/pop', () => {
     const vec = new Vector(Int32Array);
     vec.push(1);
@@ -41,5 +40,35 @@ describe('Vector', () => {
     assert.equal(vec.length, 0);
     assert.equal(vec.size, 0);
     assert.equal(vec.capacity, 4);
+  });
+
+  it('clear', () => {
+    const vec = new Vector(Int16Array, 4);
+    vec.push(1);
+    vec.push(2);
+    assert.equal(vec.get(0), 1);
+    assert.equal(vec.length, 2);
+    assert.equal(vec.size, 2 * Int16Array.BYTES_PER_ELEMENT);
+    assert.equal(vec.capacity, 4);
+    vec.clear();
+    assert.equal(vec.get(0), undefined);
+    assert.equal(vec.length, 0);
+    assert.equal(vec.size, 0);
+    assert.equal(vec.capacity, 4);
+  });
+
+  it('reset', () => {
+    const vec = new Vector(Int16Array, 4);
+    vec.push(1);
+    vec.push(2);
+    assert.equal(vec.get(0), 1);
+    assert.equal(vec.length, 2);
+    assert.equal(vec.size, 2 * Int16Array.BYTES_PER_ELEMENT);
+    assert.equal(vec.capacity, 4);
+    vec.reset();
+    assert.equal(vec.get(0), undefined);
+    assert.equal(vec.length, 0);
+    assert.equal(vec.size, 0);
+    assert.equal(vec.capacity, 0);
   });
 });
